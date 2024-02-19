@@ -1,63 +1,63 @@
-import csv
-
-def load_questions_answers(file_path):
-    """Load paragraph questions and answers from a CSV file."""
-    questions_answers = []
-    with open(file_path, 'r', newline='', encoding='utf-8') as file:
-        reader = csv.reader(file)
-        question = ''
-        answer = ''
-        for row in reader:
-            if row:
-                if len(row) >= 2:
-                    if question and answer:
-                        questions_answers.append({'question': question, 'answer': answer})
-                    question = row[0]  # Start new question
-                    answer = row[1]    # Start new answer
-                else:
-                    # Continuation of question or answer
-                    if question:
-                        question += '\n' + row[0]
-                    if answer:
-                        answer += '\n' + row[0]
-        # Add the last question-answer pair
-        if question and answer:
-            questions_answers.append({'question': question, 'answer': answer})
-    return questions_answers
-
-def get_student_answers(questions):
-    """Get student answers for each question."""
-    student_answers = []
-    for i, question in enumerate(questions, 1):
-        print(f"Q{i}: {question['question']} ")  # Prompt user for answer
-        answer = input("Your answer (press Enter to end paragraph): ")
-        student_answers.append(answer)
-    return student_answers
-
-def correct_answers(questions_answers, student_answers):
-    """Correct student answers."""
-    score = 0
-    for question_answer, student_answer in zip(questions_answers, student_answers):
-        correct_answer = question_answer['answer'].lower().strip()
-        student_answer = student_answer.lower().strip()
-        if student_answer == correct_answer:
-            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nCorrect!\n")
-            score += 1
-        elif student_answer in correct_answer or correct_answer in student_answer:
-            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nPartially correct. \nCorrect answer: {question_answer['answer']}\n")
-            score += 0.5
-        else:
-            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nIncorrect. \ngbvfdCorrect answer: {question_answer['answer']}\n")
-    return score
-
-
-def main():
-    questions_file = "Questions.csv"
-    questions_answers = load_questions_answers(questions_file)
-    student_answers = get_student_answers(questions_answers)
-    score = correct_answers(questions_answers, student_answers)
-    print(f"Your score: {score}")
-
-
-if _name_ == "_main_":
-    main()
+import csv<br>
+<br>
+def load_questions_answers(file_path):<br>
+    """Load paragraph questions and answers from a CSV file."""<br>
+    questions_answers = []<br>
+    with open(file_path, 'r', newline='', encoding='utf-8') as file:<br>
+        reader = csv.reader(file)<br>
+        question = ''<br>
+        answer = ''<br>
+        for row in reader:<br>
+            if row:<br>
+                if len(row) >= 2:<br>
+                    if question and answer:<br>
+                        questions_answers.append({'question': question, 'answer': answer})<br>
+                    question = row[0]  # Start new question<br>
+                    answer = row[1]    # Start new answer<br>
+                else:<br>
+                    # Continuation of question or answer<br>
+                    if question:<br>
+                        question += '<br>' + row[0]<br>
+                    if answer:<br>
+                        answer += '<br>' + row[0]<br>
+        # Add the last question-answer pair<br>
+        if question and answer:<br>
+            questions_answers.append({'question': question, 'answer': answer})<br>
+    return questions_answers<br>
+<br>
+def get_student_answers(questions):<br>
+    """Get student answers for each question."""<br>
+    student_answers = []<br>
+    for i, question in enumerate(questions, 1):<br>
+        print(f"Q{i}: {question['question']} ")  # Prompt user for answer<br>
+        answer = input("Your answer (press Enter to end paragraph): ")<br>
+        student_answers.append(answer)<br>
+    return student_answers<br>
+<br>
+def correct_answers(questions_answers, student_answers):<br>
+    """Correct student answers."""<br>
+    score = 0<br>
+    for question_answer, student_answer in zip(questions_answers, student_answers):<br>
+        correct_answer = question_answer['answer'].lower().strip()<br>
+        student_answer = student_answer.lower().strip()<br>
+        if student_answer == correct_answer:<br>
+            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nCorrect!\n")<br>
+            score += 1<br>
+        elif student_answer in correct_answer or correct_answer in student_answer:<br>
+            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nPartially correct. \nCorrect answer: {question_answer['answer']}\n")<br>
+            score += 0.5<br>
+        else:<br>
+            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nIncorrect. \ngbvfdCorrect answer: {question_answer['answer']}\n")<br>
+    return score<br>
+<br>
+<br>
+def main():<br>
+    questions_file = "Questions.csv"<br>
+    questions_answers = load_questions_answers(questions_file)<br>
+    student_answers = get_student_answers(questions_answers)<br>
+    score = correct_answers(questions_answers, student_answers)<br>
+    print(f"Your score: {score}")<br>
+<br>
+<br>
+if __name__ == "__main__":<br>
+    main()<br>
