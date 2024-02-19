@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "IronClad";
+    src: url("./fonts/Ironclad.otf") format("opentype"),
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("./fonts/poppins.ttf") format("truetype"),
+}
+
+body {
+    background-color: #FFC532;
+    font-family: "Poppins";
+    font-weight: 400;
+    background-image: url("./bg.jpg");
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-family: 'IronClad';
+    font-size: 6em;
+}
+
+button {
+    background-color: black;
+    color: white;
+}
+
+button:active {
+    background-color: white;
+    color: black;
+}

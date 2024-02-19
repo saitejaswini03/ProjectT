@@ -1,63 +1,39 @@
-import csv<br>
-<br>
-def load_questions_answers(file_path):<br>
-    """Load paragraph questions and answers from a CSV file."""<br>
-    questions_answers = []<br>
-    with open(file_path, 'r', newline='', encoding='utf-8') as file:<br>
-        reader = csv.reader(file)<br>
-        question = ''<br>
-        answer = ''<br>
-        for row in reader:<br>
-            if row:<br>
-                if len(row) >= 2:<br>
-                    if question and answer:<br>
-                        questions_answers.append({'question': question, 'answer': answer})<br>
-                    question = row[0]  # Start new question<br>
-                    answer = row[1]    # Start new answer<br>
-                else:<br>
-                    # Continuation of question or answer<br>
-                    if question:<br>
-                        question += '<br>' + row[0]<br>
-                    if answer:<br>
-                        answer += '<br>' + row[0]<br>
-        # Add the last question-answer pair<br>
-        if question and answer:<br>
-            questions_answers.append({'question': question, 'answer': answer})<br>
-    return questions_answers<br>
-<br>
-def get_student_answers(questions):<br>
-    """Get student answers for each question."""<br>
-    student_answers = []<br>
-    for i, question in enumerate(questions, 1):<br>
-        print(f"Q{i}: {question['question']} ")  # Prompt user for answer<br>
-        answer = input("Your answer (press Enter to end paragraph): ")<br>
-        student_answers.append(answer)<br>
-    return student_answers<br>
-<br>
-def correct_answers(questions_answers, student_answers):<br>
-    """Correct student answers."""<br>
-    score = 0<br>
-    for question_answer, student_answer in zip(questions_answers, student_answers):<br>
-        correct_answer = question_answer['answer'].lower().strip()<br>
-        student_answer = student_answer.lower().strip()<br>
-        if student_answer == correct_answer:<br>
-            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nCorrect!\n")<br>
-            score += 1<br>
-        elif student_answer in correct_answer or correct_answer in student_answer:<br>
-            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nPartially correct. \nCorrect answer: {question_answer['answer']}\n")<br>
-            score += 0.5<br>
-        else:<br>
-            print(f"Question: {question_answer['question']}\nYour answer: {student_answer}\nIncorrect. \ngbvfdCorrect answer: {question_answer['answer']}\n")<br>
-    return score<br>
-<br>
-<br>
-def main():<br>
-    questions_file = "Questions.csv"<br>
-    questions_answers = load_questions_answers(questions_file)<br>
-    student_answers = get_student_answers(questions_answers)<br>
-    score = correct_answers(questions_answers, student_answers)<br>
-    print(f"Your score: {score}")<br>
-<br>
-<br>
-if __name__ == "__main__":<br>
-    main()<br>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Module</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div style="display: flex;flex-direction: row; align-items: center; justify-content: space-between;">
+        <div></div>
+        <h1>Quizzy</h1>
+        <div>
+            <h4 style="background-color: #00141F;padding: 0.5rem 1rem; color: white; border-radius: 20px;">Score: 0</h4>
+        </div>
+    </div>
+
+    <div
+        style="display: flex; flex-direction: column; align-items: center;justify-content: space-between;height: 10em;">
+        <input type="text"
+            style="width: 30em; border: #00141F 2px solid; background-color: transparent; height: 2.4em; border-radius: 8px;color: white; padding: 0 12px;"
+            placeholder="What’s your name ?">
+        <input type="text"
+            style="width: 30em; border: #00141F 2px solid; background-color: transparent; height: 2.4em; border-radius: 8px;color: white; padding: 0 12px;"
+            placeholder="Your roll number ?">
+        <input type="text"
+            style="width: 30em; border: #00141F 2px solid; background-color: transparent; height: 2.4em; border-radius: 8px;color: white; padding: 0 12px;"
+            placeholder="Which branch are you from ?">
+        <button
+            style="width: 30em; background-color: #00141F;border: none; height: 2.4em; border-radius: 8px;color: white; font-family: 'Poppins';letter-spacing: 5px; padding: 0 12px;transition-duration: 200ms;">START
+            QUIZ</button>
+
+    </div>
+
+</body>
+
+</html>
